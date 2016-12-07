@@ -1,0 +1,40 @@
+<div id="header" ui-view="header@"></div>
+<div class="container">
+    <div class="row p-v-md">
+        <div class="col-sm-7">
+            <h3 class="text-black-lt text-u-c p-v-md">A global social network of professionals where conversations and self-forming groups cause enterprise structures to emerge.</h3>
+            <h4 class="text-black-lt">download apps</h4>
+            <div class="col-sm-4">
+                <ul class="list-inline apps row">
+                    <li><a href="#"><i class="fa fa-windows fa-3x purple"></i></a></li>
+                    <li><a href="#"><i class="fa fa-apple fa-3x blue"></i></a></li>
+                    <li><a href="#"><i class="fa fa-android fa-3x green"></i></a></li>
+                </ul>
+            </div>
+            <div class="col-sm-8">
+                <img ng-src="images/KnotSuite-Surface.png" class="row img-responsive p-v-md">
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="p-md panel text-color m">
+                <h4 class="m-b text-black-lt">
+             Create an account?
+            </h4>
+                <div class="m-b">
+                    <p class="text-xs m-t">Enter your company email address below and we will send you instructions on how to register.</p>
+                </div>
+                <form name="signupForm" data-ng-submit="signupNow(signupForm)">
+                    <div class="md-form-group">
+                        <input type="email" ng-model="user.email" class="md-input" required>
+                        <label>Your Email</label>
+                    </div>
+                    <button md-ink-ripple type="submit" class="md-btn orange-500 btn-block p-v-md m-b" ng-disabled="signupForm.$invalid">REGISTER</button>
+                </form>
+                
+                
+            </div>
+            <div class="p-v-lg text-center">Return to <button ui-sref="access.signin" class="md-btn" href="#/access/signin">sign in</button></div>
+        </div>
+    </div>
+</div>
+<div id="footer" ui-view="footer@"></div>

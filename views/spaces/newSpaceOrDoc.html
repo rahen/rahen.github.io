@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form role="form">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="newSpaceOrDocTitle">Title</label>
+                            <input type="text" class="form-control" id="newSpaceOrDocTitle" placeholder="Title"
+                                   data-ng-model="newSpaceOrDoc.spaceName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Tags</label>
+                        <!--<div class="input-group">-->
+                            <!--<input type="text" class="form-control" id="tags" data-ng-model="newSpaceOrDoc.tag"-->
+                                   <!--placeholder="TAGS">-->
+                                    <!--<span class="input-group-btn">-->
+                                        <!--<button class="btn btn-success" type="button"-->
+                                                <!--data-ng-click="addNewTag(newSpaceOrDoc.tag)">ADD-->
+                                        <!--</button>-->
+                                    <!--</span>-->
+                        <!--</div>-->
+
+                        <tags-input ng-model="docHashTags" min-length="1" placeholder="Type here" add-on-space="true" data-on-tag-added="addNewTag($tag)">
+                            <auto-complete source="loadTags($query)"></auto-complete>
+                        </tags-input>
+                    </div>
+                    <button type="submit" class="btn btn-success" data-ng-click="save()">CREATE</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

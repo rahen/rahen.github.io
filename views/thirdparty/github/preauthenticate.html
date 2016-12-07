@@ -1,0 +1,40 @@
+<div id="github" class="col-md-offset-1">
+	<div class="service_heading_block clearfix">
+		<img width="48" height="48" class="right_margin pull-left" src="https://slack.global.ssl.fastly.net/5721/plugins/github/assets/service_128.png">
+		<h3 class="no-margin m-r-md inline_block">GitHub</h3>
+		<div class="subtle_silver m-t-sm">
+			Source control and code management.
+		</div>
+	</div>
+
+	<p class="m-t-lg font-17"><a href="https://github.com/" class="text-info">GitHub</a> offers online source code hosting for Git projects, with powerful collaboration, 	code review, and issue tracking.</p>
+
+	<p class="m-b-lg font-17">This integration will post commits, pull requests, and activity on GitHub Issues to an organization in Knotsuite.</p>
+
+	
+		<div class="row">
+			<div class="col-sm-12 col-md-10 col-lg-10">	
+				<div class="card p-lg alert alert_info font-17">
+					<i class="ts_icon mdi-action-info-outline"></i>
+					<strong>A note on permissions:</strong> 
+
+					KnotSuite will automatically configure and manage which messages we receive from GitHub. To do this, we require <em>write</em> permission to your public and private repos.<br>
+
+					<a class="text-info">Learn more about why we require write permissions.</a><br><br>
+					If you'd prefer not to authenticate your GitHub account, you can <a href="?no_auth_mode=1" class="text-info">switch to <strong>unauthed</strong> mode</a> and manage the events yourself.<br><br>
+
+					If you need to add a new GitHub organization to KnotSuite, <a class="text-info"> follow these instructions</a> to grant KnotSuite access to your new organization.		
+				</div>
+
+				<div class="card p-lg font-17 clearfix">
+					<h3 class="no-margin m-b">Authentication</h3>
+					<div class="col-md-4 no-padding">
+						To use this integration, you must connect your GitHub account to KnotSuite.
+					</div>
+					<div class="col-md-8">
+					<a md-ink-ripple="" class="btn btn-fw btn-success waves-effect waves-effect font-18" data-ng-href="{{addGitAccountUrl}}">Authenticate your GitHub account</a>
+					</div>				
+				</div>
+			</div>
+		</div>	
+</div>

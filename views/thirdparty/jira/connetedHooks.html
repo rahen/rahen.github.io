@@ -1,0 +1,185 @@
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading bg-white">
+                <img src="images/icons/jira_48.png" alt=""/>
+                Existing Hooks of <strong>{{companyName}}</strong><br>
+
+            </div>
+
+            <div class="panel-body">
+                <div class="row existing-hook-container" data-ng-repeat="hook in allHooks" class="form-horizontal">
+                    <div class="row">
+                        <div class="col-sm-6">Name</div>
+                        <div class="col-sm-6 hook-name">{{hook.repository.name}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">Tags</div>
+                        <div class="col-sm-6">
+                            <div class="hash-tag" data-ng-repeat="tag in hook.hashTags">
+                                {{tag.title}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">Jira Host</div>
+                        <div class="col-sm-6">
+                            <div class="hash-tag">
+                                {{hook.repository.jiraHostUrl}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">Hook Url</div>
+                        <div class="col-sm-6">
+                            <div class="hook-event">
+                                {{hook.repository.hookListenerUrl}}
+                            </div>
+                        </div>
+                    </div>
+                    <a href="" class="btn btn-success" data-ng-click="openEditJiraHookModal($event,hook)">Edit</a>
+                    <a href="" class="btn btn-warning" data-ng-click="deleteHook(hook)">Delete</a>
+                    <a ui-sref="thirdparty.jirasetup" class="btn btn-success">Set-up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading bg-white">
+                <img src="images/icons/jira_48.png" alt=""/>
+                Create Hook in <strong>{{companyName}}</strong><br>
+
+            </div>
+            <div class="panel-body">
+                <form role="form">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="hook-name">Name</label>
+                            <input type="text" class="form-control" id="hook-name" placeholder="Hook Name"
+                                   data-ng-model="newJiraHook.hookName">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" class="form-control" data-ng-model="newJiraHook.hookDescription"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Hash Tags</label>
+
+                        <div class="input-group" style="width: 100%">
+                            <tags-input ng-model="newJiraHook.hookTags" min-length="1" placeholder="Type here" add-on-space="true" on-tag-added="onTagAdded($tag)">
+                            </tags-input>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Jira Host URL</label>
+                        <input type="text" class="form-control" data-ng-model="newJiraHook.jiraHostUrl"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>JIRA Task Approvers</label>
+                        <tags-input ng-model="newJiraHook.approvers"
+                                    min-length="1"
+                                    placeholder="Type here"
+                                    add-on-space="true"
+                                    add-from-autocomplete-only="true"
+                                    display-property="title"
+                                    replace-spaces-with-dashes="false"
+                                    template="tag-template">
+                            <auto-complete template="autocomplete-template"
+                                           source="loadUsers($query)">
+                            </auto-complete>
+                        </tags-input>
+                    </div>
+
+                    <div class="form-group">
+                        <label>How many votes</label>
+                        <input type="text" class="form-control" data-ng-model="newJiraHook.yesVoteNeeded"/>
+                    </div>
+
+                    <button type="submit" class="btn btn-success" data-ng-click="saveJiraHook()">Create</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="autocomplete-template">
+    <div class="autocomplete-template">
+        <div class="left-panel">
+            <img ng-src="{{data._id | kswImageFilter:60:data._id:false}}" />
+        </div>
+        <div class="right-panel">
+            <span ng-bind-html="$highlight($getDisplayText())"></span>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="tag-template">
+    <div class="tag-template">
+        <div class="left-panel">
+            <img ng-src="{{data._id | kswImageFilter:60:data._id:false}}"/>
+        </div>
+        <div class="right-panel">
+            <span>{{$getDisplayText()}}</span>
+            <a class="remove-button" ng-click="$removeTag()">&#10006;</a>
+        </div>
+    </div>
+</script>
+
+<style type="text/css">
+    .custom-modal{
+        width: 50%;
+    }
+
+    .tag-template .left-panel {
+        float: left;
+    }
+
+    .tag-template .left-panel img {
+        width: 24px;
+        height: 24px;
+        vertical-align: middle;
+    }
+
+    .tag-template .right-panel {
+        float: left;
+        margin-left: 5px;
+    }
+
+    .autocomplete-template .left-panel {
+        float: left;
+    }
+
+    .autocomplete-template .left-panel img {
+        width: 48px;
+        height: 48px;
+        vertical-align: middle;
+    }
+
+    .autocomplete-template .right-panel {
+        float: left;
+        margin-left: 5px;
+        margin-top: 7px;
+    }
+
+    .autocomplete-template .right-panel span:first-child {
+        font-size: 16px;
+    }
+
+    .autocomplete-template .right-panel span:nth-child(2) {
+        font-size: 14px;
+        color: gray;
+    }
+
+    .autocomplete-template .right-panel span:last-child {
+        display: block;
+        font-size: 14px;
+        font-style: italic;
+    }
+</style>

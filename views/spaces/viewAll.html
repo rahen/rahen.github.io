@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-sm-6">
+        <div ng-include="'views/partials/ksw/space/viewSpaceSignal.html'"></div>
+    </div>
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-sm-12">
+                <a href="" class="btn btn-success" ui-sref="space.new({entityType:'Space',spaceId : parentSpaceId })">NEW SPACE</a>
+                <a href="" class="btn btn-success" ui-sref="space.new({entityType:'Text',spaceId : parentSpaceId })">NEW DOC</a>
+                <a ui-sref="space.newUpload({spaceId : parentSpaceId })" class="btn btn-success">UPLOAD</a>
+                <a class="btn btn-success" ui-sref="space.newWebLink({spaceId : parentSpaceId })" >WEB LINK</a>
+            </div>
+        </div>
+        <div class="row m-v">
+            <div class="col-sm-4 pull-right">
+                <select ng-model="selectedSpaceGroup" class="form-control"
+                        ng-options="group as group.value for group in spaceGroupBy"
+                        data-ng-change="spaceGroupOnSelect(selectedSpaceGroup)"></select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6" data-ng-repeat="(groupName,groupValue) in selectedSpaces">
+                <h4>{{groupName | capitalize}}</h4>
+                <div class="md-list md-whiteframe-z0 bg-white m-b">
+                    <div class="md-list-item cursor-pointer"  data-ng-repeat="space in groupValue track by $index" data-ksw-space-open space="space">
+                        <div class="md-list-item-left">
+                            <img  data-ng-src="{{space | kswSpaceIconFilter}}" class="w-full circle">
+                        </div>
+                        <div class="md-list-item-content">
+                            <h3 class="text-md" title="{{space.title}}">{{space.title}}</h3>
+                            <small class="font-thin" title="{{space.creator.firstName + ' '+ space.creator.lastName}}">
+                                <strong>By : </strong> {{space.creator.firstName + ' '+ space.creator.lastName}}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

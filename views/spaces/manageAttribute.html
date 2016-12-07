@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-1">
+        <a href="" class="btn btn-success" data-ng-click="openAddAttributeModal($event)">CREATE NEW</a>
+        <table class="table table-bordered table-hover bg-white m-t-sm">
+            <tbody>
+            <tr data-ng-repeat="attribute in attributes">
+                <td>{{attribute.name}}</td>
+                <td>{{attribute.value}}</td>
+                <td title="Copy"><i class="fa fa-copy" data-ng-click="copyAttribute(attribute)"></i></td>
+                <td title="Remove"><i class="glyphicon glyphicon-trash" data-ng-click="removeAttribute(attribute)"></i></td>
+                <td>R <i class="glyphicon glyphicon-plus" data-ng-click="addNewRule(attribute,$event)"></i> <span data-ng-if="attribute.ruleSet.length">{{attribute.ruleSet.length}} rules</span> </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

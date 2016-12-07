@@ -1,0 +1,159 @@
+<div id="github" class="col-md-offset-1">
+    <div class="service_heading_block clearfix">
+        <img width="48" height="48" class="right_margin pull-left"
+             src="https://slack.global.ssl.fastly.net/5721/plugins/github/assets/service_128.png">
+
+        <h3 class="no-margin m-r-md inline_block">GitHub</h3>
+
+        <div class="subtle_silver m-t-sm">
+            Added by name on Jul 23rd, 2015
+        </div>
+    </div>
+
+    <p class="m-t-lg font-17"><a href="https://github.com/" class="text-info">GitHub</a> offers online source code
+        hosting for Git projects, with powerful collaboration, code review, and issue tracking.</p>
+
+    <p class="m-b-lg font-17">This integration will post commits, pull requests, and activity on GitHub Issues to an
+        organization in Knotsuite.</p>
+
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-lg-10">
+            <div class="card p-lg alert alert_info font-17">
+                <i class="ts_icon mdi-action-info-outline"></i>
+                <strong>A note on permissions:</strong>
+
+                KnotSuite will automatically configure and manage which messages we receive from GitHub. To do this, we
+                require <em>write</em> permission to your public and private repos.<br>
+
+                <a class="text-info">Learn more about why we require write permissions.</a><br><br>
+                If you'd prefer not to authenticate your GitHub account, you can <a href="?no_auth_mode=1"
+                                                                                    class="text-info">switch to <strong>unauthed</strong>
+                mode</a> and manage the events yourself.<br><br>
+
+                If you need to add a new GitHub organization to KnotSuite, <a class="text-info"> follow these
+                instructions</a> to grant KnotSuite access to your new organization.
+            </div>
+
+            <div class="card p-lg font-17 clearfix">
+                <h3 class="no-margin m-b">Integration Settings</h3>
+
+
+                <div class="clearfix">
+                    <div class="col-md-4 no-padding">
+                        <h4 class="no-margin m-b">Authentication</h4>
+                    </div>
+                    <div class="col-md-8">
+
+							<span class="btn btn-fw btn-info waves-effect waves-effect font-16">Authenticated to GitHub as: <strong>{{gitAuthenticatedAccount.name}}</strong>
+							<a href="" class="neutral_white left_margin"><i
+                                    class="glyphicon glyphicon-remove-circle"></i></a>
+							</span>
+                    </div>
+                </div>
+
+                <hr/>
+
+                <div class="clearfix">
+                    <h4 class="no-margin m-b">Repositories</h4>
+
+                    <div class="col-md-4 no-padding">
+                        <h5 class="no-margin m-b">Which repositories and branches (comma separated) should we listen to
+                            events on?</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-control font-16" data-ng-model="selectedRepository"
+                                data-ng-options="repository as repository.name for repository in userRepositories">
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <input class="form-control font-16" placeholder="Branches (optional)"/>
+                    </div>
+                </div>
+
+                <hr/>
+
+                <div class="clearfix">
+                    <h4 class="no-margin m-b">Events</h4>
+
+                    <div class="col-md-4 no-padding">
+                        <h5 class="no-margin m-b">Choose the GitHub events that you want posted to KnotSuite. </h5>
+                    </div>
+                    <div class="col-md-8">
+                        <label ng-repeat="event in hookEvents">
+                            <input
+                                    type="checkbox"
+                                    value="{{event}}"
+                                    ng-checked="selectedHookEvents.indexOf(event) > -1"
+                                    ng-click="toggleSelectionHookEvent(event)"
+                                    > {{event}}
+                        </label>
+                    </div>
+                </div>
+                <hr/>
+                <div class="clearfix">
+                    <h4 class="no-margin m-b">Post to Organization</h4>
+
+                    <div class="col-md-4 no-padding">
+                        <h5 class="no-margin m-b">Notifications that come in from GitHub will be posted here. </h5>
+                    </div>
+                    <div class="col-md-8">
+                        <label ng-repeat="connection in corporateConnections">
+                            <input
+                                    type="checkbox"
+                                    value="{{connection.title}}"
+                                    ng-checked="selectedOrgs.indexOf(connection) > -1"
+                                    ng-click="toggleSelectionConnection(connection)"
+                                    > {{connection.title}}
+                        </label>
+                    </div>
+                </div>
+
+                <hr/>
+                <div class="clearfix">
+                    <h4 class="no-margin m-b">Hash Tags</h4>
+
+                    <div class="col-md-4 no-padding">
+                        <h5 class="no-margin m-b">Use this label to provide extra context in your list of integrations
+                            (optional). </h5>
+                    </div>
+                    <div class="col-md-8">
+                        <tags-input ng-model="hookTags" min-length="1" placeholder="Type here" add-on-space="true" data-on-tag-added="onTagAdded($tag)">
+                        </tags-input>
+                    </div>
+                </div>
+
+                <hr/>
+                <div class="clearfix">
+                    <h4 class="no-margin m-b">Customize Name</h4>
+
+                    <div class="col-md-4 no-padding">
+                        <h5 class="no-margin m-b">Choose the username that this integration will post as. </h5>
+                    </div>
+                    <div class="col-md-8">
+                        <input class="form-control font-16" placeholder="github"/>
+                    </div>
+                </div>
+
+                <hr/>
+                <div class="clearfix">
+                    <h4 class="no-margin m-b">Customize Icon</h4>
+
+                    <div class="col-md-4 no-padding">
+                        <h5 class="no-margin m-b">Change the icon that is used for messages from this integration.</h5>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="clearfix m-b-md">
+                            <img class="member_image thumb_36"
+                                 src="https://slack.global.ssl.fastly.net/5721/plugins/github/assets/bot_48.png">
+                        </div>
+                        <button data-ng-click="saveIntegration()" md-ink-ripple="" class="btn btn-fw btn-success waves-effect waves-effect font-18">Save
+                            Integration
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

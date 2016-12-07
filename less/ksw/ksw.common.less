@@ -1,0 +1,255 @@
+.contains-float-element{
+  width: 100%;
+  overflow: hidden;
+}
+.cursor-pointer{
+  cursor: pointer;
+}
+
+.overflow-hidden{
+  overflow: hidden!important;
+}
+hr{
+  margin: 0;
+}
+.img-40 {
+  .cover(40px,1px)
+}
+
+@media only screen and (min-width: 320px) and (max-width: 768px) {
+    .btn-sm-w-full {
+      width: 100%;
+    }
+}
+
+/* Scrollbar styles */
+.mCSB_container {
+	width: 100% !important;
+}
+
+.mCSB_container_wrapper {
+	&>.mCSB_container {
+		padding-right:5px !important;
+	}
+}
+
+.mCSB_container_wrapper{
+	margin-right:0px !important;
+}
+.mCSB_scrollTools_vertical {
+	right: -7px !important;
+}
+
+#conversations {
+	.md-list {
+		margin-left:1px;
+	}
+}
+
+.text-ellipsis {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.msg-date {
+	width: 30%;	
+	float: left;
+}
+
+.msg-body {
+	width: 70%;
+	float: left;
+}
+
+.panel-card-custom {
+	box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.15);
+	-webkit-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.15);
+}
+
+.custom-tag {
+	float:left; 
+}
+
+#attributes td {
+	vertical-align: middle;
+}
+
+md-toast.md-default-theme {
+	background-color: #43a047;
+	border-color: #d6e9c6;
+	color: #fff;
+}
+
+#rulesList {
+	.md-list-item {
+		&:hover {
+			background: #eee;
+		}
+		
+	}
+}
+
+#modalPeoplePicker {
+	
+
+	.custom-people-picker-card {
+		box-shadow:none;
+	}
+
+	.custom-people-picker-card {
+		img {
+		  vertical-align: middle;
+		  position: relative;
+		  top: 3px;
+		  bottom: 0px;
+		  right: 0px;
+		  left: 3px;
+          .cover(70px,1px);
+	  	}
+	}
+
+	.card {
+		box-shadow: 0 0 3px rgba(0, 0, 0, 0.39);
+
+		&.selected-card {		
+			/*border: 1px solid #2196f3;*/
+			/*box-shadow: 0 1px 2px rgba(0, 0, 0, 0.59);*/
+			box-shadow: 0px 1px 5px rgba(50, 142, 208, 0.59);
+		}	
+	} 
+
+
+
+	.custom-people-picker-card {
+		p:first-of-type {	 
+		  overflow: hidden;		  
+		  text-overflow: ellipsis;
+		  white-space: nowrap;
+		}
+
+		p {
+			margin:0px;
+			font-weight: bold;
+			color: #444;
+		}
+
+		.email-container {	  
+		  overflow: hidden;
+		  font-size: 12px;
+		  text-overflow: ellipsis;
+		  white-space: nowrap;
+	      color: #3f51b5;
+	      font-weight:normal;
+		}
+
+		.selected-card {
+			background: #168FB3;
+			p {
+				color: #fff;
+			}
+		}
+	} 
+}
+
+.people-container {
+	.container-w-60 {
+		width:60px;
+		height: 60px;
+		margin-right:4px;
+		margin-bottom:4px;
+
+		img {
+                .cover(60px,1px);
+		}
+	}
+	
+}
+
+#awardSelectionModal {
+	.card-award {
+		width:250px; 
+		height:280px; 
+		float:left; 
+		margin:0 8px 8px 0;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); 
+
+		.card-award-img-container {
+			height:200px;
+			width:250px;
+
+			img {
+				max-height:200px;
+			}
+		}
+
+		.awardTitle {
+			font-size:12px;
+			height:100px;
+			line-height:1;
+			padding:8px;
+		}
+	}
+}
+
+.userThumb40 {
+    max-width: 40px;
+    max-height: 40px;    
+    width: 100%;
+    height: 100%;
+  }
+
+.md-list {	
+	.md-list-item-custom {
+	    padding: 8px 10px;
+        position: relative;
+	    display: block;
+	    min-height:56px;
+
+	    &:after{
+			content: "";
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			border-bottom: 1px solid rgba(160, 160, 160, 0.2);
+		}
+		&:last-child&:after{
+			border: none;
+		}
+		
+		.md-list-item-left {		    
+		    margin-right: 8px;		    
+		}
+
+	    .md-list-item-left-custom {	 		
+	 		padding-left:10px;
+		
+		 	h3 {
+		 		margin-top:8px;
+		 		padding-left: 4px;
+	 		    text-overflow: ellipsis;
+			    white-space: nowrap;
+			    overflow: hidden;
+		 	}		 	
+	 	}
+	 }	
+}
+
+.node {
+  cursor: pointer;
+}
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+.node text {
+  font: 10px sans-serif;
+}
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+

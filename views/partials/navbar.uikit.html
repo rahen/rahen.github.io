@@ -1,0 +1,163 @@
+<!-- Content Navbar -->
+<!--http://flatfull.com/themes/angulr/angular/#/app/dashboard-v1-->
+<div class="navbar md-whiteframe-z1 no-radius ksw-navbar ksw-md-whiteframe-z1" ng-class="$state.current.data.theme ? $state.current.data.theme.primary : app.setting.theme.primary">
+    <!-- Open side - Naviation on mobile -->
+    <a md-ink-ripple ng-click="openAside()" ng-hide="$state.current.data.child" class="navbar-item pull-left visible-xs visible-sm"><i class="mdi-navigation-menu i-24"></i></a>
+    <!-- / -->
+    <!-- GoBack - Back to parent if $state has the param 'child' -->
+    <a md-ink-ripple class="navbar-item pull-left" ng-click="goBack()" ng-show="$state.current.data.child"><i class="mdi-navigation-arrow-back i-24"></i></a>
+    <!-- / -->
+    <!-- Page title - Bind to $state's title -->
+    <div class="navbar-item pull-left h4" ng-bind="$state.current.data.title"></div>
+    <!-- / -->
+    <!-- Common tools -->
+    <ul class="nav navbar-tool navbar-right pull-right ksw-custom-nav" ng-hide="$state.current.data.child">
+        <li>
+            <a md-ink-ripple ui-sref="app.accounts" title="home">
+                <i class="ico ico-home"></i>
+            </a>
+        </li>
+
+        <li>
+            <a md-ink-ripple ui-sref="space.viewAll({parentSpaceId : parentSpaceId})" title="shared desk">
+                <i class="ico ico-shared-desk"></i>
+            </a>
+        </li>
+
+        <li>
+            <a md-ink-ripple ui-sref="space.viewAll({parentSpaceId : privateSpaceId})" title="my desk">
+                <i class="ico ico-my-desk"></i>
+            </a>
+        </li>
+
+        <li>
+            <a md-ink-ripple ui-sref="org.connection" title="connections">
+                <i class="ico ico-connections"></i>
+            </a>
+        </li>
+
+        <li>
+            <a md-ink-ripple ui-sref="award.user({accountId: currentUserId})" title="award">
+                <i class="ico ico-award"></i>
+            </a>
+        </li>
+
+        <li>
+            <a md-ink-ripple ui-sref="#/" title="story">
+                <i class="ico ico-story"></i>
+            </a>
+        </li>
+
+        <li>
+            <a md-ink-ripple ui-sref="connection.manage({type: 'personal', accountId: null})" title="add connection">
+                <i class="ico ico-add-connection"></i>
+            </a>
+        </li>
+        <li class="dropdown" dropdown="" ng-controller="searchEntityCtrl">
+            <!--<a md-ink-ripple ui-sref="search.entity" title="search">-->
+                <form   name="GlobalSearchForm" class="search-box dropdown-toggle clearfix"  dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+                    <input type="search" placeholder="Search public user, org or hashTag..." class="search-input clearfix" ng-model="query" ng-keyup="loadEntity(query)">
+                    <a md-ink-ripple ng-click="app.search.show" title="search">
+                        <i class="ico ico-search"></i>
+                    </a>
+                </form>
+                <!-- dropdown -->
+                <div class="dropdown-menu w-xl animated">
+                    <div class="panel bg-white">
+                        <div class="panel-heading b-light bg-light">
+                            <strong>You have <span>{{newResults.length||0}}</span> suggested results</strong>
+                        </div>
+                        <div class="list-group">
+                            <a ui-sref="public.publicUserProfile({accountId:data._id})" class="list-group-item clearfix" ng-repeat="data in newResults">
+                                <span class="pull-left m-r thumb-sm">
+                          <img ng-src="{{data._id | kswImageFilter:60:data._id:false}}" data-ng-if="data.entityType != 'Organization'" class="img-circle cover-tag"/>
+                          <img ng-src="{{data._id | kswImageFilter:60:data._id:true}}" data-ng-if="data.entityType == 'Organization'" class="img-circle cover-tag"/>
+                    </span>
+                                <span class="clear block m-b-none">
+                      <b>{{data.title}}</b><br>
+                      <small class="text-muted">{{data.email}}</small>
+                    </span>
+                            </a>
+                        </div>
+                        <div class="panel-footer text-sm">
+                            <a href="#all">See all the results</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- / dropdown -->
+            </form>
+
+
+        </li>
+        <li class="first-child m-l-lg">
+            <a md-ink-ripple ui-sref="chat.sendMessage" title="message">
+                <i class="ico ico-message"></i>
+                <b class="badge bg-danger up" data-ng-if="totalUnreadMessage>0">{{totalUnreadMessage}}</b>
+            </a>
+        </li>
+
+        <li class="dropdown" dropdown="">
+            <a md-ink-ripple href="" class="dropdown-toggle" dropdown-toggle="" aria-haspopup="true" aria-expanded="false" title="notification">
+                <i class="ico ico-notification"></i>
+                <span class="badge badge-sm up bg-danger pull-right-xs">{{notifications.count}}</span>
+            </a>
+            <!-- dropdown -->
+            <div class="dropdown-menu w-xl animated">
+                <div class="panel bg-white">
+                    <div class="panel-heading b-light bg-light">
+                        <strong>You have <span>{{notifications.count}}</span> notifications</strong>
+                    </div>
+                    <div class="list-group">
+                        <a href="" class="list-group-item clearfix" ng-repeat="n in notifications.notifications">
+                            <span class="pull-left m-r thumb-sm">
+                      <img ng-src="{{n.actor.id | kswImageFilter:60:n.actor.id:false}}" data-if="data.entityType == 'Person'" class="img-circle cover-chat" />
+                      <!--<img ng-src="{{data._id | kswImageFilter:60:data._id:true}}" data-ng-if="data.entityType == 'Organization'" class="img-circle"/>-->
+                    </span>
+                            <span class="clear block m-b-none">
+                      <b>{{n.actor.name}}</b>  {{n.content}}<br>
+                      <small class="text-muted">{{n.createDate|kswDateDifference}}</small>
+                    </span>
+                        </a>
+                    </div>
+                    <div class="panel-footer text-sm">
+                        <a href="#all" data-toggle="class:show animated fade-in-up">See all the notifications</a>
+                    </div>
+                </div>
+            </div>
+            <!-- / dropdown -->
+        </li>
+        <li>
+            <a md-ink-ripple ui-sref="page.settings" title="settings">
+                <i class="ico ico-settings"></i>
+            </a>
+        </li>
+
+
+
+        <li class="m-r-md" ng-controller="currentAccountCtrl as CAC">
+            <a md-ink-ripple ui-sref="public.publicUserProfile({accountId:personalAccountInfo.accountId})" title="Profile">
+                <i class="ico ico-profile"></i>
+            </a>
+        </li>
+
+    </ul>
+    <div class="pull-right" ui-view="navbar@"></div>
+    <!-- / -->
+    <!-- Search form -->
+    <!--<div id="search" class="pos-abt w-full h-full" ng-show="app.search.show=false" ng-class="$state.current.data.theme ? $state.current.data.theme.primary : app.setting.theme.primary">
+        <div class="box">
+            <div class="box-col w-56 text-center">-->
+    <!-- hide search form -->
+    <!--<a md-ink-ripple class="navbar-item inline" ng-click="app.search.show=false; app.search.content=''"><i class="mdi-navigation-arrow-back i-24"></i></a>
+            </div>
+            <div class="box-col v-m">-->
+    <!-- bind to app.search.content -->
+    <!--<input class="form-control input-lg grey-100 no-border" placeholder="Search public user, org or hashTag..." ng-model="app.search.content">
+            </div>
+            <div class="box-col w-56 text-center">
+                <a md-ink-ripple class="navbar-item inline"><i class="mdi-action-search i-24"></i></a>
+            </div>
+        </div>
+    </div>-->
+    <!-- / -->
+</div>

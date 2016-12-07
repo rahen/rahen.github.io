@@ -1,0 +1,109 @@
+<div class="row row-sm p" data-ng-if="isAdminOfThisOrg">
+    <a href="" class="btn btn-success">Add New Section</a>
+    <a href="" class="btn btn-success">ORG Settings</a>
+    <a href="" class="btn btn-success" ui-sref="connection.manage({type: 'org', accountId: orgId})">Manage Connection</a>
+    <a ui-sref="thirdparty.allServices({orgId: orgId})" class="btn btn-success">Manage Third Party</a>
+</div>
+<div class="row row-sm">
+    <div class="col-sm-3">
+        <div class="panel panel-card">
+            <div class="r-t pos-rlt" md-ink-ripple style="background:url({{orgProfile | kswImageFilter: 128:orgProfile._id:true}}) center center; background-size:cover">
+                <div class="p-lg bg-white-overlay text-center r-t">
+                    <a href class="w-xs inline">
+                        <div class="ratio_1x1"><img data-ng-src="{{orgProfile | kswImageFilter: 128:orgProfile._id:true}}" class="img-circle img-responsive"></div>
+                    </a>
+                    <div class="m-b m-t-sm h2">
+                        <span class="">{{orgProfile.organizationName}}</span>
+                    </div>
+                    <p>
+                        {{orgProfile.email}}
+                    </p>
+                </div>
+            </div>
+            <div class="list-group no-radius no-border">
+                <a class="list-group-item" ui-sref="org.connection({accountId: orgProfile._id})">
+                    Networks
+                </a>
+                <a class="list-group-item">
+                    Spaces
+                </a>
+                <a class="list-group-item">
+                    View Award Gallery
+                </a>
+                <a class="list-group-item">
+                    Nominate an Award
+                </a>
+            </div>
+            <div class="p">
+                <p>TOP ACHIEVEMENTS</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="">{{orgProfile.companyName}}</span>
+            </div>
+            <div class="panel-body">
+                <form editable-form name="editableForm" onaftersave="saveUser()">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Address</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static">
+                                    <span editable-text="user.name">{{ orgProfile.address || "You haven't added anything yet" }}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Description</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static">
+                                    <span editable-text="user.name">{{ orgProfile.description || 'empty' }}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <a class="btn btn-sm btn-success m-b p-h no-border" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</a>
+                                    <span ng-show="editableForm.$visible">
+                                        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+                                            Save
+                                        </button>
+                                        <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+                                            Cancel
+                                        </button>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-5">
+        <div class="panel panel-card">
+            <form>
+                <textarea class="form-control no-border" rows="3" placeholder="Write something..."></textarea>
+            </form>
+            <div class="lt p">
+                <button class="btn btn-info pull-right btn-sm p-h font-bold">Post</button>
+                <ul class="nav nav-pills nav-sm">
+                    <li>
+                        <a href>
+                            <i class="fa fa-camera"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href>
+                            <i class="fa fa-video-camera"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<a md-ink-ripple class="md-btn md-fab md-fab-bottom-right pos-fix green">
+    <i class="mdi-editor-mode-edit i-24"></i>
+</a>

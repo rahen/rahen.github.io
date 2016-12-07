@@ -1,0 +1,31 @@
+<md-dialog>
+    <md-content>
+        <div class="panel-body">
+            <form role="form">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" data-ng-model="hook.repository.name">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" class="form-control" data-ng-model="hook.repository.description">
+                </div>
+                <div class="form-group">
+                    <label>Hash Tags</label>
+                    <div class="input-group" style="width: 100%">
+                        <tags-input ng-model="hook.hashTags" min-length="1" placeholder="Type here" add-on-space="true" on-tag-added="onTagAdded($tag)">
+                        </tags-input>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </md-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="updateHook()" class="btn btn-success">
+            OK
+        </md-button>
+        <md-button ng-click="hideModal()" class="btn btn-warning">
+            CANCEL
+        </md-button>
+    </div>
+</md-dialog>

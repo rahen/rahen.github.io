@@ -1,0 +1,21 @@
+<md-dialog>
+    <md-subheader class="md-sticky-no-effect pull-right text-right">
+        <span ng-click="cancelModal()">Close</span>
+    </md-subheader>
+    <md-content>
+        <div layout="row m-r">
+            <div class="col-sm-12 p-md m-t" id="rulesList">
+                <div class="md-list md-whiteframe-z0 bg-white m-b">
+                    <div class="md-list-item b-l-info b-a m-b-sm" ng-class="{'grey-200' : isAlreadyAdded(rule)}" data-ng-repeat="rule in rules" data-ng-click="selectRule(rule)">
+                        <div class="md-list-item-content">
+                            <h3 class="text-md">{{rule.displayName}}</h3>
+                            <small class="font-thin">{{rule.description}}</small>
+                            <p>Already Added : {{isAlreadyAdded(rule)}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-dialog>
+

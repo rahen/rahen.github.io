@@ -1,0 +1,205 @@
+<div class="row">
+    <div class="col-sm-12" data-ng-controller="spaceSignalCtrl">
+        <div class="card" ksw-on-scroll="" load-more-signal="loadMoreSignal()">
+            <div style="padding:10px">
+            <ksw-compose-signal ksw-signal="signal"></ksw-compose-signal>
+            <ksw-people-picker></ksw-people-picker>
+            </div>
+        </div>
+        <div class="grid-content signal-main"
+             data-ng-repeat="signal in signals">
+            <div class="card signal-content">
+                <div class="m-b bg-light ">
+                    <div class="panel-heading b-b yellow-50 signal-header"
+                         data-ng-if="signal.doc.updateAreaString"
+                         data-ksw-update-string-area
+                         string="{{signal.doc.updateAreaString}}"></div>
+                </div>
+                <div class="card-body">
+                    <div class="clear">
+                        <a href class="pull-left w-40 m-r">
+                            <img class="w-full img-circle userThumb cover-signal"
+                                 data-ng-src="{{signal.doc.actor.url | kswImageFilter: 60:signal.doc.actor.userId}}"
+                                 data-ng-if="signal.doc.activityType != 'Award-Nominated'">
+                            <img class="w-full img-circle userThumb cover-signal"
+                                 data-ng-src="{{signal.doc.target.id | kswImageFilter: 60:signal.doc.target.id._id}}"
+                                 data-ng-if="signal.doc.activityType == 'Award-Nominated'">
+                        </a>
+                        <div class="message clear" data-ng-if="signal.doc.activityType != 'Award-Nominated'">
+                            <p>
+                                <span class="userName font-bold">{{signal.doc.actor.displayName}} </span>
+                                <span data-ksw-read-more data-content="{{signal.doc.title}}"></span>
+                            </p>
+                        </div>
+                        <div class="message item"
+                             data-ng-if="signal.doc.activityType == 'Award-Nominated'">
+                            <span class="userName font-bold">{{signal.doc.target.id.firstName +' ' + signal.doc.target.id.lastName}} </span>
+                            nominated by {{signal.doc.actor.displayName}} for
+                            {{signal.doc.object.templateId.title}}. Needs
+                            {{signal.doc.object.templateId.initialPledgeRequired}} total pledges.
+
+                        </div>
+                    </div>
+                    <div class="signal-like-dislike-container">
+                        <div class="text-xxs font-thin text-muted">
+                            <p>{{signal.doc.published | kswDateDifference}}</p>
+                        </div>
+                        <div class="card-tools">
+                            <p>
+                                <i class="fa fa-thumbs-up"
+                                   data-ng-click="saveLike(signal.doc)"></i>
+                                {{signal.doc.fbYes.length}}
+
+                                <i class="fa fa-thumbs-down"
+                                   data-ng-click="saveDisLike(signal.doc)"></i>
+                                {{signal.doc.fbNo.length}}
+
+                            </p>
+                        </div>
+                    </div>
+                    <div class="activity-type"
+                         data-ng-if="signal.doc.spaceId"
+                         data-ksw-space-open space="signal.doc.spaceId">
+                        <div class="activity-type-content">
+                            <img data-ng-src="{{signal.doc.spaceId | kswSpaceIconFilter}}">
+                            <p class="spaceName">{{signal.doc.spaceId.spaceName}}</p>
+                        </div>
+                    </div>
+                    <div class="activity-type" data-ng-if="signal.doc.activityType == 'Award-Nominated'">
+                        <img data-ng-src="{{signal.doc.object.templateId.imageUri | kswUrlFilter}}">
+                        <p class="award-title">{{signal.doc.object.templateId.title}}</p>
+                        <p class="award-status">Status: {{signal.doc.object.trackId.status}}</p>
+                    </div>
+                    <div class="tagged-people clearfix" data-ng-if="signal.doc.objectTags.objectTags.length">
+                        <p class="text-info">People Tagged</p>
+                        <div class="people-container">
+                            <div class="people" data-ng-repeat="object in signal.doc.objectTags.objectTags">
+                                <img title="{{object.objTitle}}"
+                                     ng-src="{{object | kswImageFilter: 40:object.objId}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hash-tag clearfix" data-ng-if="signal.doc.objectTags.hashTags.length">
+                        <p class="text-info">Hash Tags</p>
+                        <div class="tags">
+                                                <span class="cursor-pointer" data-ui-sref="filter.filterByTag({tagName: tag.title})"
+                                                      data-ng-repeat="tag in signal.doc.objectTags.hashTags">{{tag.title}}</span>
+                        </div>
+                    </div>
+                    <div class="signal-content-attachment clearfix" data-ng-if="signal.doc.attachments.length">
+                        <p class="text-info">Attachments</p>
+                        <a href="{{attachment | kswUrlFilter}}"
+                           data-ng-repeat="attachment in signal.doc.attachments">
+                            <img style="width:30px;" data-ng-src="{{attachment | kswDocumentIconFilter}}">
+                        </a>
+                    </div>
+                    <div class="signal-comment" data-ng-repeat="comment in signal.comments">
+                        <div class="pull-left w-40 m-r">
+                            <img class="w-full img-circle userThumb cover-signal"
+                                 data-ng-src="{{comment.actor | kswImageFilter: 60:comment.actor.userId}}">
+                        </div>
+                        <div class="message clear">
+                            <span class="userName font-bold">{{comment.actor.displayName}} </span>
+                            <span data-ksw-read-more data-content="{{comment.title}}"></span>
+                            <div class="bottom">
+                                <p class="text-xxs font-thin text-muted">{{comment.published |
+                                    kswDateDifference}}</p>
+                                <div class="card-tools-custom">
+                                    <i class="fa fa-thumbs-up" data-ng-click="saveLike(comment)"></i>
+                                    {{comment.fbYes.length}}
+                                    <i
+                                            class="fa fa-thumbs-down" data-ng-click="saveDisLike(comment)"></i>
+                                    {{comment.fbNo.length}}
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tagged-people clearfix" data-ng-if="comment.objectTags.objectTags.length">
+                            <p class="text-info">People Tagged</p>
+                            <div class="people-container">
+                                <div class="people" data-ng-repeat="object in comment.objectTags.objectTags">
+                                    <img title="{{object.objTitle}}"
+                                         ng-src="{{object | kswImageFilter: 40:object.objId}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hash-tag clearfix" data-ng-if="comment.objectTags.hashTags.length">
+                            <p class="text-info">Hash Tags</p>
+                            <div class="tags">
+                                                                <span class="cursor-pointer" data-ui-sref="filter.filterByTag({tagName: tag.title})"
+                                                                      data-ng-repeat="tag in comment.objectTags.hashTags">{{tag.title}}</span>
+                            </div>
+                        </div>
+                        <div class="signal-comment-attachment clearfix" data-ng-if="comment.attachments.length">
+                            <p class="text-info">Attachments</p>
+                            <a href="{{attachment | kswUrlFilter}}"
+                               data-ng-repeat="attachment in comment.attachments">
+                                <img
+                                        data-ng-src="{{attachment | kswDocumentIconFilter}}">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="new-comment">
+                        <div class="pull-left w-40">
+                            <img class="w-full img-circle userThumb cover-signal"
+                                 src="{{currentUserId | kswImageFilter: 250:currentUserId}}">
+                        </div>
+                        <div class="w-full new-comment-body-container">
+                            <div class="new-comment-body">
+                                <div class="message">
+                                                                            <textarea class="form-control msd-elastic"
+                                                                                      placeholder="Write your comment here"
+                                                                                      data-ng-model="signal.newComment.message"
+                                                                                      data-ng-keypress="($event.which === 64)?showMiniPeoplePickerInComment($event,signal.newComment):0"
+                                                                                      data-ng-keyup="($event.which === 8)? signal.newComment.showMiniPeoplePicker = false : 0"></textarea>
+                                    <ksw-mini-people-picker
+                                            data-people="signal.newComment.people"
+                                            data-ng-if="signal.newComment.showMiniPeoplePicker"
+                                            data-comment="signal.newComment"></ksw-mini-people-picker>
+                                </div>
+                                <div class="new-comment-people-tagged clearfix"
+                                     data-ng-if="signal.newComment.taggedPeople.length">
+                                    <div data-ng-repeat="person in signal.newComment.taggedPeople">
+                                        <img data-ng-src="{{person | kswImageFilter : 100 : person.id}}"
+                                             alt="{{person.title}}"
+                                             title="{{person.title}}"
+                                                />
+                                        <img class="remove" src="images/icons/remove-rounded.png"
+                                             data-ng-click="removeNewCommentTaggedPeople(person.id,signal)"/>
+                                    </div>
+                                </div>
+                                <div data-ng-if="signal.newComment.attachments.length"
+                                     class="new-comment-attachment lt">
+                                    <label data-ng-repeat="attachemnt in signal.newComment.attachments">
+                                        {{attachemnt.name}}
+                                        <i class="close"
+                                           data-ng-click="removeNewCommentAttachment(attachemnt,signal)"></i>
+                                    </label>
+                                </div>
+                                <div class="new-comment-bottom">
+                                    <div class="lt p" style="padding:16px 0">
+                                        <button data-ng-click="saveNewComment(signal)"
+                                                class="btn btn-light pull-right btn-sm p-h font-bold waves-effect">Reply
+                                        </button>
+                                        <ul class="nav nav-pills nav-sm">
+                                            <li>
+                                                <i class="mdi-editor-attach-file text-lg pull-left signal-attachment">
+                                                    <input type="file" name="upload"
+                                                           data-ksw-file-on-change="onCommentAttachmentChange(signal)"
+                                                           multiple="true"/>
+                                                </i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center m-b">
+            <i class="fa fa-circle-o-notch fa-spin text-lg text-muted-lt"></i>
+        </div>
+    </div>
+</div>

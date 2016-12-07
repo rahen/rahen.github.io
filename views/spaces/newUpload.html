@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading bg-white">
+                UPLOAD
+                <br>
+            </div>
+            <div class="panel-body">
+                <form role="form">
+                    <div class="form-group">
+                        <div class="form-file">
+                            <input type="file" data-ksw-file-on-change="uploadOnChange(newUpload)">
+                            <button class="btn btn-default">Select File</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fileTitle">Enter Title</label>
+                        <input type="text" class="form-control" id="fileTitle" placeholder="Title" data-ng-model="newUpload.title">
+                    </div>
+                    <div class="form-group">
+                        <label for="tags">Tags</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="tags" data-ng-model="newUpload.tag">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-success" type="button" data-ng-click="addNewTag(newUpload.tag)">ADD</button>
+                                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label data-ng-repeat="tag in newUpload.tags track by $index">{{tag}}</label>
+                    </div>
+                    <button type="submit" class="btn btn-success" data-ng-click="saveNewUpload()">CREATE</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

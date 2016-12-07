@@ -1,0 +1,38 @@
+<div class="row p">
+    <div class="col-sm-6 m-b-sm">
+        <select ng-model="selectedPeoplePickerGroup" class="form-control"
+                ng-options="group as group.value for group in peoplePickerGroups"
+                data-ng-change="updatePeoplePickerResults(selectedPeoplePickerGroup)"></select>
+    </div>
+    <div class="col-sm-6">
+        <div class="input-group">
+            <input type="search" class="form-control"
+                   data-ng-model="peopleSearchText"
+                   placeholder="Search people..."
+                   data-ng-keyup="$event.keyCode == 13 ? findPeople(peopleSearchText) : null">
+                <span class="input-group-btn">
+                    <a href="#" class="btn btn-success" data-ng-click="findPeople(peopleSearchText)">Search</a>
+                </span>
+        </div>
+    </div>
+</div>
+<div class="row p">
+    <div class="col-sm-4" data-ng-repeat="(groupName,groupValue) in selectedGroup | orderBy:groupName">
+        
+        <div  class="md-list md-whiteframe-z0 bg-white m-b">
+            <h4  class="md-list-item green-50"  data-ng-if="found=filtered.length">
+                <span class="label label-pill ppull-right-sm green-500 rounded" style="float:right">{{found}}</span>
+                {{groupName | capitalize}}</h4>
+            <div class="md-list-item"  data-ng-repeat="entity in filtered = (groupValue | filter: peopleSearchText)" data-ng-click="getEntityProfileLink(entity)">
+                <div class="md-list-item-left">
+                    <img  ng-src="{{entity | kswImageFilter: 128:entity.entityId:true}}" class="w-full circle img-40" data-ng-if="entity.entityType!='Person'">
+                    <img  ng-src="{{entity | kswImageFilter: 128:entity.entityId}}" class="w-full circle img-40" data-ng-if="entity.entityType == 'Person'">
+                </div>
+                <div class="md-list-item-content">
+                    <h3 class="text-md" title="{{entity.title}}">{{entity.title}}</h3>
+                    <small class="font-thin" title="{{entity.email}}">{{entity.email}}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

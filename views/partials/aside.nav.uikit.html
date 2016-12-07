@@ -1,0 +1,56 @@
+<nav ui-nav class="text-xs">
+    <!--<div class="current-user">-->
+        <!--<div class="current-user-left">-->
+            <!--<img data-ng-src="{{personalAccountInfo | kswImageFilter: 113:personalAccountInfo.accountId}}" class="img-responsive rounded"/>-->
+        <!--</div>-->
+        <!--<div class="current-user-right">-->
+            <!--<b><span class="hidden-folded m-l inline">{{currentAccount.userName.toUpperCase()}}</span></b>-->
+            <!--<b><span class="hidden-folded m-l inline">{{personalAccountInfo.currentUserData.orgDomain}}</span></b>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="nav-ogr">
+        <div class="nav-ogr-header">
+            <h5>ORGS</h5> <b class="pull-right up"> <span class="org-counter">{{corporateConnections.length + 1}}</span>
+            <span>Available</span></b>
+        </div>
+         <div class="org-container"  ng-scrollable="{scrollX:'none',scrollY:'right'}">
+            <div class="org-item" data-ng-click="createNewOrg()">
+                <div class="org-item-left circle hash-tag-background">
+                    <span class="font-bold text-lg">+</span>
+                </div>
+                <div class="org-item-right hash-tag-color">
+                    CREATE ORG
+                </div>
+            </div>
+
+            <div class="org-item" data-ng-repeat="connection in corporateConnections"
+                 data-ng-click="changeAccount(connection,false)" ui-sref="app.accounts({ accountId : connection.id })">
+                <div class="org-item-left circle org-text-icon-background">
+                    <span class="font-thin">ORG</span>
+                </div>
+                <div class="org-item-right" title="{{connection.title}}">
+                    {{connection.title.toUpperCase()}}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <hr/>
+    
+    <div class="hot-tag">
+        <div class="hot-tag-header">
+            <h5>HOT TAGS</h5>
+        </div>
+
+        <div class="hot-tag-container">
+            <button class="btn btn-rounded btn-default tag-button text-xs" data-ng-repeat="hashTag in hashTagsBypersona"
+                    data-ui-sref="filter.filterByTag({tagName: hashTag.title})">
+                {{hashTag.title}} &nbsp;✕
+            </button>
+        </div>
+
+        <h5 class="hot-tag-bottom hash-tag-color cursor-pointer" ui-sref="hashTag.viewAll">
+            ALL TAGS
+        </h5>
+    </div>
+</nav>

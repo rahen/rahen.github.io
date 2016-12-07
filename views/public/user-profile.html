@@ -1,0 +1,103 @@
+<div id="header" ui-view="header@"></div>
+<div class="box-row">
+    <div class="box-cell overflow-hidden">
+        <div class="box-inner p" ui-view>
+            <div class="row row-sm">
+                <div class="col-sm-offset-2 col-sm-5">
+                    <div class="panel panel-card">
+                        <div class="r-t pos-rlt" md-ink-ripple style="background:url({{userProfile | kswImageFilter: 128:userProfile._id}}) center center; background-size:cover">
+                            <div class="p-lg bg-white-overlay text-center r-t">
+                                <!--<div ng-controller="currentAccountCtrl">-->
+                                    <a md-ink-ripple  title="edit profile"  ui-sref="page.profile({accountId:userProfile._id})" class="md-btn md-fab md-fab-top-right pos-fix orange m">
+                                    <i class="mdi-editor-mode-edit i-24"></i>
+                                </a>
+                                <!--</div>-->
+                                <a href class="w-xs inline">
+                                    
+                                    <div class="ratio_1x1"><img data-ng-src="{{userProfile | kswImageFilter: 128:userProfile._id}}" class="img-circle img-responsive"
+                                        alt="Profile"></div>
+                                </a>
+                                <div class="m-b m-t-sm h2">
+                                    <span class="">{{userProfile.firstName + " " + userProfile.lastName}}</span>
+                                </div>
+                                <p>
+                                    {{userProfile.email}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                          
+                            <form editable-form name="editableForm" onaftersave="saveUser()">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">First Name:</label>
+                                        <div class="col-sm-9">
+                                            <p class="form-control-static">
+                                                <a editable-text="user.name">{{ userProfile.firstName || "You haven't added anything yet" }}</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Last Name:</label>
+                                        <div class="col-sm-9">
+                                            <p class="form-control-static">
+                                                <span editable-text="user.name">{{ userProfile.lastName || 'empty' }}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Position:</label>
+                                        <div class="col-sm-9">
+                                            <p class="form-control-static">
+                                                <span editable-text="user.name">{{ userProfile.position || "You haven't added anything yet" }}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">About:</label>
+                                        <div class="col-sm-9">
+                                            <p class="form-control-static">
+                                                <span editable-text="user.name">{{ userProfile.about || "You haven't added anything yet" }}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Telephone:</label>
+                                        <div class="col-sm-9">
+                                            <p class="form-control-static">
+                                                <span editable-text="user.name">{{ userProfile.telephone || "You haven't added anything yet" }}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Secondary Email:</label>
+                                        <div class="col-sm-9">
+                                            <p class="form-control-static">
+                                                <span editable-text="user.name">{{ userProfile.sEmail || "You haven't added anything yet" }}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="md-list md-whiteframe-z0 bg-white">
+                        <h4 class="md-list-item green-100 no-margin">Awards of {{userProfile.firstName + " " + userProfile.lastName}}</h4>
+                        <div class="md-list-item" data-ng-repeat="award in userAdwards">
+                            <div class="md-list-item-left circle green">
+                                <img ng-src="{{award.imageUri | kswBadgeFilter: award.badgeTemplateId: 120:120}}" class="w-full circle" alt="award">
+                            </div>
+                            <div class="md-list-item-content">
+                                <h3 class="text-md">{{award.title}}</h3>
+                                <small class="font-thin"><b>By: </b> {{award.badgeGivenBy.title}}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer" ui-view="footer@"></div>

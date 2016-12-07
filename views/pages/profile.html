@@ -1,0 +1,59 @@
+<div class="row row-sm">
+    <div class="col-sm-3">
+        <div class="panel panel-card">
+            <div class="r-t pos-rlt" md-ink-ripple style="background:url({{userProfile | kswImageFilter: 128:userProfile._id}}) center center; background-size:cover">
+                <div class="p-lg bg-white-overlay text-center r-t"> <span href class="w-xs inline">
+          <div class="ratio_1x1">
+            <input type="file" name="upload" class="input-file-invisible" data-ksw-file-on-change="onChangeProfilePicture()">
+            <img data-ng-src="{{userProfile | kswImageFilter: 128:userProfile._id}}" class="img-circle img-responsive"></div>
+          </span>
+                    <h4 class="m-b m-t-sm h4"> {{userProfile.firstName + " " + userProfile.lastName}} </h4>
+                    <p> {{userProfile.email}} </p>
+                </div>
+            </div>
+            <div class="list-group no-radius no-border"> <a class="list-group-item" ui-sref="network.user({accountId: userProfile._id})"> Networks </a> <a class="list-group-item"> Spaces </a>                <a class="list-group-item" ui-sref="award.user({accountId: userProfile._id})"> View Award Gallery </a>
+                <a
+                class="list-group-item" ui-sref="award.all"> Nominate an Award </a> <a class="list-group-item" ui-sref="public.publicUserProfile({accountId: userProfile._id})"> Public Profile </a>                    </div>
+            <div class="p">
+                <p>TOP ACHIEVEMENTS</p>
+                <div class="m-v contains-float-element">
+                    <a class="text-muted" data-ng-repeat="award in userProfile.awardList"> <img data-ng-src="{{award.image|kswUrlFilter}}" alt="" class="img-responsive award-icon" /> </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <!---->
+        <div class="panel panel-card p-v-sm">
+            <h4 class="p-h">Profile of {{userProfile.firstName}} {{userProfile.lastName}}</h4>
+            <div class="list-group no-radius no-border">
+                <!--<pre id="debug" class="p m">
+                    {{ userProfile | json }}
+                </pre>-->
+                <div class="list-group-item" ng-repeat="attr in attributes" data-ng-if="attributes.length"> {{attr.name}}: 
+                    <a href="#" id="{{attr._id}}" onaftersave="onaftersaveAttibute($index,$data)" editable-text="attr.value">{{attr.value||nothing}}</a>                    
+                 </div>
+            </div>
+        </div>
+        <!---->
+    </div>
+    <div class="col-sm-5">
+        <div class="panel panel-card">
+            <form>
+                <textarea class="form-control no-border" rows="3" placeholder="Write something..."></textarea>
+            </form>
+            <div class="lt p">
+                <button class="btn btn-info pull-right btn-sm p-h font-bold">Post</button>
+                <ul class="nav nav-pills nav-sm">
+                    <li>
+                        <a href> <i class="fa fa-camera"></i> </a>
+                    </li>
+                    <li>
+                        <a href> <i class="fa fa-video-camera"></i> </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<a md-ink-ripple class="md-btn md-fab md-fab-bottom-right pos-fix green"> <i class="mdi-editor-mode-edit i-24"></i> </a>

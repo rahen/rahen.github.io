@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading bg-white">
+                {{rule.description}}
+            </div>
+            <div class="panel-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label>Award</label>
+                        <a href="" class="btn btn-addon form-control" data-ng-click="openAwardPickerModal($event)">SELECT
+                            AWARD</a>
+                    </div>
+                    <div class="form-group" data-ng-if="selectedAward.imageUri">
+                        <img data-ng-src="{{selectedAward.imageUri | kswUrlFilter}}" alt="{{selectedAward.title}}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Candidate (s)</label>
+                        <md-radio-group ng-model="candidateOption">
+                            <md-radio-button ng-repeat="d in ['Whoever makes the change','Selected']"
+                                             ng-value="d" data-ng-click="onSelectCandidateOption(d)">
+                                {{ d }}
+                            </md-radio-button>
+                        </md-radio-group>
+                    </div>
+                    <div class="form-group" data-ng-if="candidateOption=='Selected'">
+                        <a href="" class="btn btn-addon form-control" data-ng-click="openPeoplePickerModalForCandidates($event)">SELECT
+                        </a>
+                    </div>
+                    <div class="form-group people-container clearfix" data-ng-if="selectedCandidate.id && candidateOption == 'Selected'">
+                        <div class="container-w-60 pull-left">
+                            <img class="img-circle" data-ng-src="{{selectedCandidate | kswImageFilter:100:selectedCandidate.id}}" alt="{{selectedCandidate.title}}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Awarded By</label>
+                        <md-radio-group ng-model="awardedByOption">
+                            <md-radio-button ng-repeat="d in ['The rule maker','Some one else']"
+                                             ng-value="d" data-ng-click="onSelectAwardedByOption(d)">
+                                {{ d }}
+                            </md-radio-button>
+                        </md-radio-group>
+                    </div>
+                    <div class="form-group" data-ng-if="awardedByOption == 'Some one else'">
+                        <a href="" class="btn btn-addon form-control" data-ng-click="openPeoplePickerModalForAwardedBy($event)">SELECT
+                        </a>
+                    </div>
+                    <div class="form-group people-container clearfix" data-ng-if="nominator.id && awardedByOption == 'Some one else'">
+                        <div class="container-w-60 pull-left">
+                            <img class="img-circle" data-ng-src="{{nominator | kswImageFilter:100:nominator.id}}" alt="{{nominator.title}}"/>
+                        </div>
+                    </div>
+                    <div class="m-t-sm">
+                        <button type="submit" class="btn btn-success" data-ng-click="applyRule()">APPLY</button>
+                        <button type="submit" class="btn btn-warning" data-ng-click="updateSpace()">CANCEL</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

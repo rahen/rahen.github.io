@@ -1,0 +1,49 @@
+<ul class="nav nav-md nav-tabs nav-lines b-info">
+    <li class="active">
+        <a href data-toggle="tab" data-target="#signals">SIGNALS</a>
+    </li>
+    <li>
+        <a href data-toggle="tab" data-target="#attributes">ATTRIBUTES</a>
+    </li>
+    <li>
+        <a href data-toggle="tab" data-target="#tags">TAGS</a>
+    </li>
+    <li>
+        <!--<a href data-toggle="tab" data-target="#relations">RELATIONS</a>-->
+        <a ui-sref="space.treeLayout({spaceId: $stateParams.spaceId})">RELATIONS</a>
+    </li>
+</ul>
+<div class="tab-content p m-b-md b-t b-t-2x">
+    <div role="tabpanel" class="tab-pane animated fadeIn active" id="signals"
+         ng-include="'views/partials/ksw/space/viewSpaceSignal.html'"></div>
+    <div role="tabpanel" class="tab-pane animated fadeIn" id="attributes" data-ng-controller="spaceAttributeCtrl">
+        <div class="row">
+            <div class="sm-col-6 pull-right m-r-md m-b">
+                <a href="" class="btn btn-success" data-ng-click="openAddAttributeModal($event)">Add</a>
+                <a ui-sref="space.manageAttribute({spaceId : spaceId})" class="btn btn-success">Manage</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="sm-col-8">
+                <table class="table table-bordered table-hover table-condensed bg-white">
+                    <tr ng-repeat="attribute in attributes">
+                        <td class="v-middle">
+                            {{attribute.name}}
+                        </td>
+                        <td class="v-middle">
+                            <input data-ng-disabled="isEditableByCurrentUser(attribute)" type="text" class="form-control" id="spaceTitle" data-ng-model="attribute.value" data-ng-if="attribute.type == 'string'" data-ng-keypress="($event.which === 13)?updateAttribute(attribute):0">
+                            <input data-ng-disabled="isEditableByCurrentUser(attribute)" ui-date="dateOptions" data-ng-model="attribute.value" class="form-control" data-ng-if="attribute.type == 'date'" data-ng-change="updateAttribute(attribute)">
+                            <input data-ng-disabled="isEditableByCurrentUser(attribute)" type="text" class="form-control" data-ng-model="attribute.value" data-ng-if="attribute.type == 'number'" data-ng-keypress="($event.which === 13)?updateAttribute(attribute):0">
+                            <select data-ng-disabled="isEditableByCurrentUser(attribute)" name="" id="" class="form-control" data-ng-if="attribute.type == 'boolean'"
+                                    data-ng-model="attribute.value" data-ng-options=" opt as opt for opt in booleanOptions" data-ng-change="updateAttribute(attribute)"></select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div role="tabpanel" class="tab-pane animated fadeIn" id="tags" ng-include="'views/partials/ksw/space/tags.html'"></div>
+    <div role="tabpanel" class="tab-pane animated fadeIn" id="relations">
+        Relation coming soon
+    </div>
+</div>

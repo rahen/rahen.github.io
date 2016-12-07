@@ -1,0 +1,13 @@
+<div class="row row-sm">
+    <!--<div class="col-sm-6 col-md-3 col-md-offset-1" data-ng-repeat="award in awards">-->
+        <div class="col-sm-4" data-ng-repeat="award in awards">
+        <div class="thumbnail">
+            <img ng-src="{{award.badgeTemplateId | kswBadgeFilter:award.badgeTemplateId:60:60}}" alt="Washed Out">
+            <div class="caption">
+                <h5 class="hash-tag-color">{{award.title}}</h5>
+                <p>{{award.description}}</p>
+                <p class="text-xxs font-thin text-muted">{{award.badgeGivenDate}}</p>
+            </div>
+        </div>
+    </div>
+</div>

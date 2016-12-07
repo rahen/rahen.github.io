@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading bg-white">
+                {{rule.description}}
+            </div>
+            <div class="panel-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label>How many</label>
+                        <input type="text" class="form-control" data-ng-model="inputSet.requiredNumber"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Who can approve?</label>
+                        <a href="" class="btn btn-addon form-control" data-ng-click="openPeoplePickerModal()">ADD CONNECTION</a>
+                    </div>
+                    <div class="form-group people-container clearfix">
+                        <div class="container-w-60 pull-left" data-ng-repeat="person in whoCanModify">
+                            <img class="img-circle"  data-ng-src="{{person | kswImageFilter:100:person.id}}" alt="{{person.title}}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Applicable within next hrs</label>
+                        <input type="text" class="form-control" data-ng-model="inputSet.dueDate"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Feedback question</label>
+                        <div class="clearfix">
+                            <div class="m-r-sm p-v-xs pull-left">Do you</div>
+                            <input style="width:auto;" type="text" class="form-control m-r-sm pull-left" data-ng-model="inputSet.question"/>
+                            <div class="m-r-sm p-v-xs pull-left">?</div>
+                        </div>
+                    </div>
+                    <div class="m-t-sm">
+                        <button type="submit" class="btn btn-success" data-ng-click="applyRule()">APPLY</button>
+                        <button type="submit" class="btn btn-warning" data-ng-click="updateSpace()">CANCEL</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

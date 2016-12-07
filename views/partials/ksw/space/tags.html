@@ -1,0 +1,13 @@
+<div class="row">
+    <div class="col-sm-12" data-ng-controller="spaceTagCtrl">
+        <tags-input ng-model="tags" min-length="1" placeholder="Type here" add-on-space="true">
+            <auto-complete source="loadTags($query)"></auto-complete>
+        </tags-input>
+        <a href="" data-ng-click="saveTags()" class="btn btn-success m-t-sm">ADD</a>
+        <div class="p-v-sm">
+            <span class="label cyan m-r-sm custom-tag" data-ng-repeat="tag in space.tags">{{tag}} 
+                <i class="glyphicon glyphicon-remove" data-ng-click="removeTag(tag)"></i>
+            </span>
+        </div>
+    </div>
+</div>

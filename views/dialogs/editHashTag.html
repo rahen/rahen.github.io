@@ -1,0 +1,21 @@
+<md-dialog>
+    <md-content>
+        <div class="panel-body">
+            <form role="form">
+                <div class="form-group">
+                    <label for="attributeName">Tag Title</label>
+                    <input type="text" class="form-control" id="attributeName" data-ng-model="hashTag.title">
+                </div>
+            </form>
+        </div>
+    </md-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="saveTag()" class="btn btn-success">
+            DONE
+        </md-button>
+        <md-button ng-click="cancelModal()" class="btn btn-warning">
+            CANCEL
+        </md-button>
+    </div>
+</md-dialog>
+

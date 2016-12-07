@@ -1,0 +1,21 @@
+<md-dialog>
+    <md-content>
+        <div id="awardSelectionModal">
+            <div class="p-xs p-md">
+                <div class="card-award" data-ng-repeat="award in awards" data-ng-click="onAwardSelect(award)">
+                    <div class="item text-center card-award-img-container">
+                        <img ng-src="{{award.imageUri | kswUrlFilter}}" class="r-t" alt="Washed Out" alt="{{award.title}}">
+                    </div>
+                    <div class="awardTitle">
+                        <h4 class="text-center">{{award.title}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </md-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="cancelModal()" class="btn btn-warning">
+            CANCEL
+        </md-button>
+    </div>
+</md-dialog>

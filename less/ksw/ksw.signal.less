@@ -1,0 +1,422 @@
+.compose-signal {
+
+  .signal-attachment {
+    position: relative;
+    top: 1px;
+  }
+  .attached-files{
+    padding: 0px;
+    label {
+      padding: 0 4px;
+      margin: 0 2px 5px;
+      background: #D3DFF6;
+      .close {
+          width: 16px;
+          height: 16px;
+          background: url(../images/icons/remove.png) no-repeat 4px 0px;
+          background-size: 80%;
+          opacity: 1;
+          margin-left: 2px;
+          top: 4px;
+          position: relative;
+      }
+    }
+  }
+  .signal-bottom {
+    padding: 16px 0 0 0;
+    .signal-people-picker {
+      width: 40px;
+      height: 40px;
+      background: url("/assets/img/icons/signal/add_org.png") no-repeat;
+      float: left;
+      cursor: pointer;
+    }    
+  }  
+
+  .signal-audience {
+    padding-top: 11px;
+  }
+
+  textarea {
+    resize:none;
+  }
+
+  .tagged-people {
+    clear:both;
+    .people-container {
+      width: 32px;
+      height:32px;
+      float:left;
+      margin-right:10px;
+      img {        
+        width: 100%;
+        max-height: 32px;                      
+      }
+    }
+  }
+}
+
+.people-picker {        
+    z-index: 999;
+    top: auto;
+    padding:20px 0 10px 0;
+    width: 95%;
+    height: auto;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #999;  
+    .custom-people-picker-card   {
+      .email-container {
+        text-overflow: ellipsis;      
+        white-space: nowrap;
+        overflow: hidden;
+        padding: 10px;
+        font-size: 12px;
+      }
+
+     p {
+        line-height: 0;
+        text-align: left;
+        font-size: 14px;
+        color: #43b8ea;
+      }
+
+      p:first-of-type {
+        color: #000000;
+        margin-bottom: 0px;
+        text-overflow: ellipsis;        
+        white-space: nowrap;
+        overflow: hidden;
+        padding: 36px 10px 10px;
+      }
+    }
+
+    .people-list-container {
+      height:225px;
+    }
+  }
+
+.signal-hash-tag{
+  label{
+    padding-right: 4px;
+  }
+}
+
+.signal-card-heading{
+  padding: 12px 0 0 26px;;
+}
+
+.signal-attachment {    
+    position:relative;
+    top:5px;
+
+    input {
+      display: block !important;
+      width: 24px !important;
+      height: 24px !important;
+      opacity: 0 !important;
+      overflow: hidden !important;
+      cursor: pointer;
+      position: absolute;
+      top: 0px;
+    } 
+}  
+
+.w-full-custom {
+  max-width: 100%;
+}  
+
+
+
+.signal-main {
+
+  .hash-tag {
+    padding: 0 0 10px 54px;
+    span {
+      margin-right:4px;
+    }
+  }
+  .activity-type {
+    clear:both;
+    margin: 20px 0 18px 0;
+    padding-left:56px;    
+
+    .activity-type-content{
+      border: 1px solid #B6ABAB;
+      width: 100%;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      min-height:60px;
+    }
+
+    .spaceName {
+      padding: 10px 0 0 70px;
+    }
+
+    img {
+      max-width: 60px;
+      max-height: 60px;
+      position: absolute;
+      left: 0px;
+    }
+
+    .award-title, .award-status {
+      margin: 8px 0 0 70px;
+    }
+  }
+
+  .bottom {
+    position: relative;
+  }
+
+  .userThumb {
+    max-width: 40px;
+    max-height: 40px;    
+    width: 100%;
+  }
+
+  .card-tools-custom {
+    top:0px;
+    right: 3px;
+    position: absolute;
+  }
+
+  .tagged-people {
+    padding:0 0 20px 54px;
+    clear:both;
+    .people-container {
+      clear:both;
+
+      .people {
+        width: 32px;
+        height: 32px;
+        float:left;
+        margin-right:10px;
+
+        img {          
+          width: 100%;
+          max-height: 32px;
+        }
+      }
+    }
+    
+  }
+   
+  .signal-content-attachment {
+    padding: 0px 0 20px 54px;
+    clear: both;
+    a {
+      height: 32px;
+      width: 32px;
+      display:inline-block;
+      margin-right: 10px;
+
+      img {
+        max-width: 32px;
+        max-height: 32px;      
+        width: 100%;
+        height: 100%;
+      }
+    }
+    
+  }
+
+  .signal-comment-attachment {
+    clear:both;
+    padding: 0px 0 20px 54px;
+
+    a {
+      height: 32px;
+      width: 32px;
+      display:inline-block;
+      margin-right: 10px;
+
+      img {        
+        max-width: 32px;
+        max-height: 32px;      
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  .list-group {
+    border: 1px solid #ccc;
+  }
+  .new-comment-people-tagged {
+    padding: 5px 12px 5px 12px;
+
+    div {
+      width:40px;
+      height:40px;
+      float: left; 
+      margin-right: 10px;
+      position:relative;
+
+      .remove {
+        width: 16px;
+        height: 16px;
+        cursor:pointer;
+        position:absolute;
+        top:0px;
+        right:0px;
+        display:none;
+      }
+
+      &:hover {
+        .remove {
+          display:block;
+        }        
+      }
+
+      img {
+        width:100%;
+        max-height: 40px;
+        border-radius: 50%;
+      }
+    }
+    
+  }
+
+  .list-group-item {
+    min-height: 60px;
+
+    img {
+      width: 40px;
+      max-height: 40px;
+      float: left; 
+      margin-right: 10px;
+    }
+
+    &:hover {
+      background: #168fb3;
+      color:#fff;
+    }
+  }
+
+  .new-comment-bottom {
+      padding-left: 6px;
+      clear: both;
+      padding-right: 12px;
+      .p{
+        padding:16px 0;
+      }
+  }
+
+  .readmore, .readless {
+    color: #004978;
+  }
+
+  
+  .signal-comment:first-child {
+    padding-top:20px;
+  } 
+
+  .signal-like-dislike-container {
+    position: relative;
+    clear: both;
+    padding: 0 0 0 56px;
+
+    .card-tools {
+      top: 0px;
+      right: 3px;
+    }
+  } 
+
+  .signal-comment {
+    clear: both;
+    padding: 0 0 10px 0;
+    .userThumb {
+      max-width: 40px;
+      max-height: 40px;
+      width: 100%;
+      border-radius: 50%;
+      height: 100%;
+    }
+  }
+
+  .new-comment {
+    .new-comment-body-container {
+      padding-left:56px;
+      .new-comment-body {
+        width:100%; border:1px solid #cfd1d4;
+
+        .message {
+          position: relative;
+            .form-control {
+              border:0px;
+              resize:none;
+            }
+         }
+        .new-comment-attachment {
+          padding: 5px 0 5px 12px;
+            label {
+              margin-right:4px;
+              background: #D3DFF6;
+              padding: 0 4px;
+
+              .close {
+                  width: 16px;
+                  height: 16px;
+                  background: url(../images/icons/remove.png) no-repeat 4px 0px;
+                  background-size: 80%;
+                  opacity: 1;
+                  margin-left: 2px;
+                  top: 4px;
+                  position: relative;
+              }
+            }
+          }
+        
+      }
+    }
+    .list-group {
+      position: absolute;
+      width: 100%;      
+      z-index: 999999;
+    }
+  }
+
+  .userName {
+    color: #3B78CA;
+  }
+
+  .mini-people-picker-container{
+    height: 200px;
+    position: absolute;  
+    width: 100%;
+    .mini-people-picker {
+      height:100%;
+    }
+  }
+  
+} 
+
+
+.custom-people-picker-card {
+  .card {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.39);
+
+    &.selected-card {   
+      background: #168FB3;
+      box-shadow: 0px 1px 5px rgba(50, 142, 208, 0.59);
+
+      p {
+        color: #fff;
+      }
+    } 
+  }
+  img {
+    max-width: 70px;
+    max-height: 70px;
+    width: 70px;
+    height: 70px;
+  }
+}
+
+.signal-content {
+  .fa-thumbs-up, .fa-thumbs-down {
+    color: #888;
+  }
+}
